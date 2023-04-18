@@ -1,0 +1,20 @@
+.nbContainer {
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nbList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nbItem {
+    cursor: pointer;
+    padding: 5px 5px;
+}
+
+.nbItem:last-child {
+    margin-right: 15px;
+}

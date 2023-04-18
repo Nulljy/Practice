@@ -1,0 +1,45 @@
+.app {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 0.7fr 1.3fr 1.7fr 1.3fr 0.7fr;
+  grid-template-rows: 0.2fr 2fr 0.3fr;
+  grid-template-areas: 
+    'nav nav nav nav nav'
+    'br customers customers customers br2'
+    'footer footer footer footer footer'
+  ;
+}
+
+.Navbox {
+  grid-area: nav;
+  background-color: #63d8c7;
+}
+
+.blank {grid-area: br;}
+.blank2 {grid-area: br2;}
+
+.Customerbox {
+  grid-area: customers;
+  background-color: #87b1d2;
+}
+
+.table {
+  width: 100%;
+}
+
+.footer {
+  grid-area: footer;
+  background-color: #cce1a2;
+}
+
+@media only screen and (max-width: 550px) {
+  .app {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.1fr 1.3fr 0.1fr;
+    grid-template-areas: 
+      'nav'
+      'customers'
+      'footer'
+    ;
+  }
+}
