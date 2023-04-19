@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "image":"https://placeimg.com/64/64/1",
+        "name": "강해린",
+        "birthday": "081122",
+        "gender":"여자",
+        "job": "newJeans"
+    },
+    {
+        "id": 2,
+        "image":"https://placeimg.com/64/64/2",
+        "name": "하니",
+        "birthday": "081122",
+        "gender":"여자",
+        "job": "newJeans"
+    }
+]
