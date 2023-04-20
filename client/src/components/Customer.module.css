@@ -1,8 +1,12 @@
 .container {
+    text-align: center;
     background-color: white;
 }
 
-
+.imgTd {
+    display: flex;
+    justify-content: center;
+}
 .imagebox1 {
     width: 50px;
     height: 50px;
@@ -19,5 +23,9 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+th, td {
+    border: 1px solid #F0F0F0;
 }
 

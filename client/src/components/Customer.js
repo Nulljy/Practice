@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import style from './Customer.module.css'
-import haerin from '../public/haerin.jpg';
 
 
 class Customer extends Component {
-
     render() {
         const {customers} = this.props;
         return (
@@ -12,7 +10,7 @@ class Customer extends Component {
                 {customers.map((item, i) => {
                     return <tr key={item.toString()} scope='row' className={style.container}>
                                 <th scope='row' className='id'>{item.id}</th>
-                                <td>
+                                <td className={style.imgTd}>
                                     <div className={style.imagebox1}>
                                         <img className={style.image} src={item.image} alt="profile">
                                         </img>

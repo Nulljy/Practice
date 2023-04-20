@@ -3,11 +3,14 @@ import style from './App.module.css';
 import Customer from './components/Customer';
 import Navbar from './components/Navbar'
 import TableHead from './components/TableHead'
-import haerin from './public/haerin.jpg';
 
 class App extends Component{
-  state = {
-    customers:""
+  constructor(prop) {
+    super(prop);
+    this.state = {
+      customers:"",
+      open: false,
+    }
   }
 
   componentDidMount() {
@@ -21,11 +24,18 @@ class App extends Component{
     return body;
   }
 
+  clickOpenModal = () => {
+    this.setState({open: true});
+  }
+  closeModal = () => {
+    this.setState({open: false});
+  }
+
   render() {
     return (
       <div className={style.app}>
         <div className={style.Navbox}>
-          <Navbar/>
+          <Navbar openModal={this.clickOpenModal}/>
         </div>
         <div className={style.blank}></div>
         <div className={style.Customerbox}>

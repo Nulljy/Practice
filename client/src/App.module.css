@@ -20,11 +20,12 @@
 
 .Customerbox {
   grid-area: customers;
-  background-color: #87b1d2;
+  border: 1px solid #F0F0F0;
 }
 
 .table {
   width: 100%;
+  border-collapse: collapse;
 }
 
 .footer {

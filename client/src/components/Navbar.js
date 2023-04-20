@@ -8,9 +8,9 @@ class Navbar extends Component {
         return (
             <div className={style.nbContainer}>
                 <div className={style.nbList}>
-                    {nbList.map((item, i) => {
-                        return <div key={item.toString()} className={style.nbItem}>{item}</div>
-                    })}
+                    <div className={style.nbItem}>'추가하기'</div>
+                    <div className={style.nbItem}>'삭제하기'</div>
+                    <div className={style.nbItem}>'편집하기'</div>
                 </div>
             </div>
         )
