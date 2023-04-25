@@ -3,6 +3,8 @@ import style from './App.module.css';
 import Customer from './components/Customer';
 import Navbar from './components/Navbar'
 import TableHead from './components/TableHead'
+import Modal from './components/Modal'
+
 
 class App extends Component{
   constructor(prop) {
@@ -19,12 +21,14 @@ class App extends Component{
   }
   
   callApi = async () => {
+    console.log('리로드');
     const response = await fetch("/api/customers");
     const body = await response.json();
     return body;
   }
 
   clickOpenModal = () => {
+    console.log('클릭');
     this.setState({open: true});
   }
   closeModal = () => {
@@ -37,6 +41,7 @@ class App extends Component{
         <div className={style.Navbox}>
           <Navbar openModal={this.clickOpenModal}/>
         </div>
+        {this.state.open ? <Modal closeModal={this.closeModal} clickAdd = {this.callApi}/> : ""}
         <div className={style.blank}></div>
         <div className={style.Customerbox}>
           <table className={style.table}>
