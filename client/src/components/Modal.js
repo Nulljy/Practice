@@ -23,9 +23,18 @@ class Modal extends Component {
             .then(res => {
                 console.log(res.data);
             })
-        this.props.clickAdd();
+        this.setState({
+            file: null,
+            fileName:'',
+            userName: '',
+            birthday: '',
+            gender: '',
+            job: '',
+        })
+        // this.props.clickAdd();
         window.location.reload();
     }
+
     addCustomer = () => {
         let formData = new FormData();
         formData.append('image', this.state.file);
@@ -42,9 +51,9 @@ class Modal extends Component {
     }
 
     handleChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value,
-        })
+        let nextState = {};
+        nextState[e.target.name] = e.target.value;
+        this.setState(nextState);
     }
 
     handleFileChange = (e) => {
