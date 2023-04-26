@@ -7,22 +7,25 @@ class Modal extends Component {
 
     constructor(props) {
         super(props);
+        const {isEdit, item} = this.props;
         this.state = {
+            editing: isEdit,
             file: null,
             fileName:'',
-            userName: '',
-            birthday: '',
-            gender: '',
-            job: '',
+            userName: isEdit ? item.name : '',
+            birthday: isEdit ? item.birthday : '',
+            gender: isEdit ? item.gender : '',
+            job: isEdit ? item.job : '',
         }
     }
+    
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.addCustomer()
+        this.actCustomer()
             .then(res => {
                 console.log(res.data);
-            })
+            });
         this.setState({
             file: null,
             fileName:'',
@@ -30,24 +33,25 @@ class Modal extends Component {
             birthday: '',
             gender: '',
             job: '',
-        })
-        // this.props.clickAdd();
+        });
         window.location.reload();
     }
 
-    addCustomer = () => {
+    actCustomer = () => {
         let formData = new FormData();
         formData.append('image', this.state.file);
         formData.append('userName', this.state.userName);
         formData.append('birthday', this.state.birthday);
         formData.append('gender', this.state.gender);
         formData.append('job', this.state.job);
-        const url = "/api/customers";
+        if(this.state.editing) {
+            formData.append('id', this.props.item.id);
+        }
+        const url = this.state.editing ? "/api/editCustomer" : "/api/customers";
         const config = {
             headers: {"Content-Type": "multipart/form-data"},
         }
-        return axios.post(url, formData, config);
-
+        return this.state.editing ? axios.patch(url, formData, config) : axios.post(url, formData, config);
     }
 
     handleChange = (e) => {
@@ -68,7 +72,7 @@ class Modal extends Component {
             <div className={style.container}>
                 <form className={style.modalContent} onSubmit={this.handleSubmit}>
                     <label>
-                        회원 추가하기
+                        {this.state.editing ? '회원 수정하기' : '회원 추가하기'}
                     </label>
                     <input type='file'
                         file={this.state.file}
@@ -86,11 +90,16 @@ class Modal extends Component {
                     <input type='text' placeholder='직업' value={this.state.job} name='job' onChange={this.handleChange}>
                     </input>
                     <button className={style.add} type='submit'>
-                        추가하기
+                        {this.state.editing ? '편집하기' : '추가하기'}
                     </button>
+                    {this.state.editing ? 
+                        <button className={style.close} onClick={this.props.closeEdit}>
+                        편집취소
+                    </button> 
+                    : 
                     <button className={style.close} onClick={this.props.closeModal}>
                         닫기
-                    </button>
+                    </button>}
                 </form>
             </div>
         )

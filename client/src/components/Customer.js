@@ -1,8 +1,33 @@
 import React, {Component} from 'react';
 import style from './Customer.module.css'
+import axios from 'axios';
 
 
 class Customer extends Component {
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         id:'',
+    //         image:'',
+    //         name:'',
+    //         birthday:'',
+    //         gender:'',
+    //         job:'',
+    //     }
+    // }
+    
+    deleteCustomer(id){
+        axios.patch('/api/deleteCustomer', {
+            id: id,
+        }).then(res => {
+            console.log(res.data);
+        }).catch(err => {
+            console.error(err);
+        });
+        this.props.refresh();
+    }
+
+
     render() {
         const {customers} = this.props;
         return (
@@ -20,8 +45,8 @@ class Customer extends Component {
                                 <td className='birthday'>{item.birthday}</td>
                                 <td className='gender'>{item.gender}</td>
                                 <td className='job'>{item.job}</td>
-                                <td><button>편집</button></td>
-                                <td><button>삭제</button></td>
+                                <td><button onClick={() => this.props.editCustomer(item)}>편집</button></td>
+                                <td><button onClick={(e) => this.deleteCustomer(item.id)}>삭제</button></td>
                             </tr>
                     })
                 }

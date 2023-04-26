@@ -48,6 +48,32 @@ app.post('/api/customers', upload.single('image'), (req, res) => {
         )
 })
 
+app.patch('/api/deleteCustomer', (req, res) => {
+    let sql = 'UPDATE CUSTOMERS SET isDeleted = ? WHERE id = ?';
+    let id = req.body.id;
+    let params = [1, id];
+    connection.query(sql, params,
+            (err, rows, fields) => {
+                res.send(rows);
+            }
+        )
+})
+app.patch('/api/editCustomer', upload.single('image'), (req, res) => {
+    let sql = 'UPDATE CUSTOMERS SET image = ?, name = ?, birthday = ?, gender = ?, job = ? WHERE id = ?';
+    let image = '/image/' + req.file.filename;
+    let name = req.body.userName;
+    let birthday = req.body.birthday;
+    let gender = req.body.gender;
+    let job = req.body.job;
+    let id = req.body.id;
+    let params = [image, name, birthday, gender, job, id];
+    connection.query(sql, params,
+            (err, rows, fields) => {
+                res.send(rows);
+            }
+        )
+})
+
 app.listen(port, () => {
     console.log(`포트${port}에서 대기중입니다.`);
 })
